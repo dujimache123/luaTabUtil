@@ -29,8 +29,10 @@ function getString(v)
 end
 
 function getBoolean(v)
-	if v then
-		return v
+	if v == true then
+		return "true"
+	elseif v == false then
+		return "false"
 	else
 		return "\t"
 	end

@@ -4,8 +4,10 @@ function getOneFieldStr(fieldName, fieldType, fieldStr)
 	local result = ""
 	result = "\t\t\t" .. result
 	
-	if fieldType == "int" or fieldType == "float" or fieldType == "boolean"  then
+	if fieldType == "int" or fieldType == "float" then
 		result = result .. fieldName .. " = " .. fieldStr .. ",\n"
+	elseif fieldType == "boolean" then
+		result = result .. fieldName .. " = " .. string.lower(fieldStr) .. ",\n"
 	elseif fieldType == "string" then
 		result = result .. fieldName .. " = \"" .. fieldStr .. "\",\n" 
 	elseif fieldType == "ccp" then
@@ -43,7 +45,9 @@ function excelToLua()
 			local fieldNames = nil
 			local fieldTypes = nil
 			if content[2] and content[3] then
+				content[2] = string.rtrim(content[2])
 				fieldNames = string.split(content[2], "\t")
+				content[3] = string.rtrim(content[3])
 				fieldTypes = string.split(content[3], "\t")
 			end
 			if not fieldNames or not fieldTypes then
@@ -59,6 +63,7 @@ function excelToLua()
 				resultStr = resultStr .. "\t" .. "records = {\n"
 				for j = 4, #content do
 					local oneLine = content[j]
+					oneLine = string.rtrim(oneLine)
 					if string.len(oneLine) > 0 then
 						resultStr = resultStr .. "\t\t[" .. index .. "] = {\n"
 						local fieldStrs = string.split(oneLine, "\t")

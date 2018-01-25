@@ -44,4 +44,73 @@ function string.split(input, delimiter)
 	return arr
 end
 
+--[[--
+
+去除输入字符串头部的空白字符，返回结果
+
+~~~ lua
+
+local input = "  ABC"
+print(string.ltrim(input))
+-- 输出 ABC，输入字符串前面的两个空格被去掉了
+
+~~~
+
+空白字符包括：
+
+-   空格
+-   制表符 \t
+-   换行符 \n
+-   回到行首符 \r
+
+@param string input 输入字符串
+
+@return string 结果
+
+@see string.rtrim, string.trim
+
+]]
+function string.ltrim(input)
+    return string.gsub(input, "^[ \t\n\r]+", "")
+end
+
+--[[--
+
+去除输入字符串尾部的空白字符，返回结果
+
+~~~ lua
+
+local input = "ABC  "
+print(string.ltrim(input))
+-- 输出 ABC，输入字符串最后的两个空格被去掉了
+
+~~~
+
+@param string input 输入字符串
+
+@return string 结果
+
+@see string.ltrim, string.trim
+
+]]
+function string.rtrim(input)
+    return string.gsub(input, "[ \t\n\r]+$", "")
+end
+
+--[[--
+
+去掉字符串首尾的空白字符，返回结果
+
+@param string input 输入字符串
+
+@return string 结果
+
+@see string.ltrim, string.rtrim
+
+]]
+function string.trim(input)
+    input = string.gsub(input, "^[ \t\n\r]+", "")
+    return string.gsub(input, "[ \t\n\r]+$", "")
+end
+
 return Util

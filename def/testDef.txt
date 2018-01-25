@@ -1,2 +1,2 @@
-a,b,c,d
-int,string,array+int+;,ccp
+a,b,c,d,e
+int,string,array+int+;,ccp,boolean
